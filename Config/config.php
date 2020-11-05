@@ -42,9 +42,8 @@ return array(
         'ldap_auth_version' => 3,
         'ldap_auth_ssl' => false,
         'ldap_auth_starttls' => true,
-        // TODO Coming feature: Bind DN
-        //'ldap_auth_bind_dn' => 'cn=admin,dc=ldap,dc=company,dc=com',
-        //'ldap_auth_bind_passwd' => null,
+        'ldap_auth_bind_dn' => 'cn=admin,dc=ldap,dc=company,dc=com',
+        'ldap_auth_bind_passwd' => null,
         'ldap_auth_base_dn' => null,
         'ldap_auth_user_query' => '(objectclass=inetOrgPerson)',
         'ldap_auth_isactivedirectory' => false,
