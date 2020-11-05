@@ -142,24 +142,36 @@ class LdapAuthIntegration extends AbstractSsoFormIntegration
         $is_ad     = $settings['is_ad'];
         $ad_domain = $settings['ad_domain'];
 
-        $login    = $parameters['login'];
+        $bind_dn = $settings['bind_dn'];
+        $bind_password = $settings['bind_passwd'];
+
+        $login = $parameters['login'];
         $password = $parameters['password'];
 
         try {
-            if ($is_ad) {
-                $user_dn = "$login@$ad_domain";
+        	if ($is_ad) {
+                $dn = "$login@$ad_domain";
             } else {
                 $user_dn = "$userKey=$login,$base_dn";
             }
 
+        	if (!empty($bind_dn) && !empty($bind_password)) {
+				$ldap->bind($bind_dn, $bind_password);
+        	} else {
+        		$ldap->bind($dn, $password);
+        	}
+
             $userquery = "$userKey=$login";
             $query     = "(&($userquery)$query)"; // original $query already has brackets!
 
-            $ldap->bind($user_dn, $password);
             $response = $ldap->find($base_dn, $query);
             // If we reach this far, we expect to have found something
             // and join the settings to the response to retrieve user fields
             if (is_array($response)) {
+            	if (!empty($bind_dn) && !empty($bind_password)) {
+            		$user_dn = self::arrayGet($response[0], 'dn', null);
+					$ldap->bind($user_dn, $password);
+	        	}
                 $response['settings'] = $settings;
             }
         } catch (\Exception $e) {

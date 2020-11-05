@@ -99,9 +99,8 @@ class UserSubscriber implements EventSubscriberInterface
             'ssl'           => $this->parametersHelper->getParameter('ldap_auth_ssl', false),
             'starttls'      => $this->parametersHelper->getParameter('ldap_auth_starttls', true),
             'version'       => $this->parametersHelper->getParameter('ldap_auth_version', 3),
-            // TODO Coming feature: Bind DN
-            //'bind_dn'       => $this->parametersHelper->getParameter('ldap_auth_bind_dn'),
-            //'bind_passwd'   => $this->parametersHelper->getParameter('ldap_auth_bind_passwd'),
+            'bind_dn'       => $this->parametersHelper->getParameter('ldap_auth_bind_dn'),
+            'bind_passwd'   => $this->parametersHelper->getParameter('ldap_auth_bind_passwd'),
             'base_dn'       => $this->parametersHelper->getParameter('ldap_auth_base_dn'),
             'user_query'    => $this->parametersHelper->getParameter('ldap_auth_user_query', ''),
             'is_ad'         => $this->parametersHelper->getParameter('ldap_auth_isactivedirectory', false),
