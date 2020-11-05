@@ -164,7 +164,7 @@ class ConfigType extends AbstractType
                 ],
                 'empty_value' => false,
             ]
-        );
+        );*/
 
         $builder->add(
             'ldap_auth_bind_dn',
@@ -194,7 +194,7 @@ class ConfigType extends AbstractType
             ]
         );
 
-        $builder->add(
+        /*$builder->add(
             'ldap_auth_test_authenticate_button',
             'standalone_button',
             [
